@@ -13,4 +13,9 @@ class File extends Model
         'folder_id',
         'path'
     ];
+
+    public function folder()
+    {
+        return $this->belongsTo(Folder::class);
+    }
 }

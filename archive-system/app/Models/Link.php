@@ -14,4 +14,9 @@ class Link extends Model
         'folder_id',
         'url'
     ];
+
+    public function folder()
+    {
+        return $this->belongsTo(Folder::class);
+    }
 }
