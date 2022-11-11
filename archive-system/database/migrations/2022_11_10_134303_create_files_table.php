@@ -13,11 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('projects', function (Blueprint $table) {
+        Schema::create('files', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->foreignId('leader_id')->constrained('users');
-            $table->foreignId('status_id')->constrained();
+            $table->foreignId('folder_id')->constrained();
+            $table->string('path');
             $table->timestamps();
         });
     }
@@ -29,7 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('projects');
-        Schema::dropIfExists('project');
+        Schema::dropIfExists('files');
     }
 };
