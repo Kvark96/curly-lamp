@@ -24,11 +24,12 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        Type::create(['name' => 'Admin']);
-        Type::create(['name' => 'ProjectOwner']);
-        Type::create(['name' => 'User']);
+        Type::factory()->create(['name' => 'Admin']);
+        Type::factory()->create(['name' => 'ProjectOwner']);
+        Type::factory()->create(['name' => 'User']);
 
-        User::create(['name' => 'Administrator', 'email' => 'admin@admin.com', 'password' => 'hej', 'type_id' => 3]);
+        User::factory()->create(['name' => 'Administrator', 'email' => 'admin@admin.com']);
+        // User::create(['name' => 'Administrator', 'email' => 'admin@admin.com', 'password' => 'hej', 'type_id' => 3]);
 
 
     }
