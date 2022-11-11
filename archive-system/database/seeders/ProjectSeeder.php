@@ -10,6 +10,7 @@ use App\Models\Status;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class ProjectSeeder extends Seeder
 {
@@ -20,7 +21,7 @@ class ProjectSeeder extends Seeder
      */
     public function run()
     {
-        User::factory()->create([
+        $user = User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@example.com',
         ]);
@@ -32,6 +33,7 @@ class ProjectSeeder extends Seeder
 
         for($i = 0; $i < $numberOfProjects; $i++) {
             $project = Project::factory()->create();
+            DB::table('users_projects')->insert(['user_id' => $user->id, 'project_id' => $project->id]);
             $folder = Folder::factory()->create(['project_id' => $project->id]);
             $link = Link::factory()->create(['folder_id' => $folder->id]);
             $file = File::factory()->create(['folder_id' => $folder->id]);
