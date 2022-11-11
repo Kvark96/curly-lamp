@@ -8,4 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Link extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'name',
+        'folder_id',
+        'url'
+    ];
+
+    public function folder()
+    {
+        return $this->belongsTo(Folder::class);
+    }
 }
