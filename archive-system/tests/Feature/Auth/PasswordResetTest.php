@@ -7,10 +7,19 @@ use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Notification;
 use Tests\TestCase;
+use App\Models\Type;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class PasswordResetTest extends TestCase
 {
-    use RefreshDatabase;
+    use DatabaseMigrations;
+
+    public function setUp(): void
+    {
+        parent::setUp();
+
+        $this->artisan('db:seed --class=DatabaseSeeder');
+    }
 
     public function test_reset_password_link_screen_can_be_rendered()
     {

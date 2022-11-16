@@ -3,12 +3,21 @@
 namespace Tests\Feature\Auth;
 
 use App\Models\User;
+use App\Models\Type;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class PasswordConfirmationTest extends TestCase
 {
-    use RefreshDatabase;
+    use DatabaseMigrations;
+
+    public function setUp(): void
+    {
+        parent::setUp();
+
+        $this->artisan('db:seed --class=DatabaseSeeder');
+    }
 
     public function test_confirm_password_screen_can_be_rendered()
     {
