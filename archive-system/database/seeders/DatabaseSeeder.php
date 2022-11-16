@@ -28,7 +28,7 @@ class DatabaseSeeder extends Seeder
         Type::factory()->create(['name' => 'ProjectOwner']);
         Type::factory()->create(['name' => 'User']);
 
-        User::factory()->create(['name' => 'Administrator', 'email' => 'admin@admin.com']);
+        User::factory()->create(['name' => 'Administrator', 'email' => 'admin@admin.com', 'type_id' => 1]);
         // User::create(['name' => 'Administrator', 'email' => 'admin@admin.com', 'password' => 'hej', 'type_id' => 3]);
 
 
