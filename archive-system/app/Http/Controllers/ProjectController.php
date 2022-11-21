@@ -11,7 +11,7 @@ class ProjectController extends Controller
     public function index()
     {
         return Inertia::render('Projects/Index', [
-            'projects' => Project::with('users:id,name')->latest()->get(),
+            'projects' => Project::with('status:id,name')->latest()->get(),
         ]);
     }
 }

@@ -7,6 +7,7 @@ use App\Models\Folder;
 use App\Models\Link;
 use App\Models\Project;
 use App\Models\Status;
+use App\Models\Type;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -21,6 +22,10 @@ class ProjectSeeder extends Seeder
      */
     public function run()
     {
+        Type::factory()->create(['name' => 'admin']);
+        Type::factory()->create(['name' => 'projectowner']);
+        Type::factory()->create(['name' => 'user']);
+
         $user = User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@example.com',

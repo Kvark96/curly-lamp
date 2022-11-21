@@ -23,7 +23,7 @@ class ProjectFactory extends Factory
 
 
         return [
-            'name' => 'unnamed-project',
+            'name' => fake()->company(),
             'leader_id' => $leader->id,
             'status_id' => Status::find($statusId),
         ];
