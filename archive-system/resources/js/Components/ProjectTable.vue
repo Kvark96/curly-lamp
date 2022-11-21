@@ -46,12 +46,12 @@
 </template>
 
 <script setup>
-    import { ref, defineProps, computed } from 'vue'
+    import { ref, computed } from 'vue'
 
-    defineProps(['projects']);
+    const props = defineProps(['projects']);
 
     const sortedProjects = computed(() => {
-        return this.props.projects;
+        return props.projects;
     });
 
 </script>
