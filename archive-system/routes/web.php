@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\RandomController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -30,6 +31,10 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::resource('projects', ProjectController::class)
+    ->only(['index'])
+    ->middleware(['auth']);
+
+Route::resource('project/{id}', RandomController::class)
     ->only(['index'])
     ->middleware(['auth']);
 

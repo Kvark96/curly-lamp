@@ -6,13 +6,12 @@ use App\Models\Project;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
-class ProjectController extends Controller
+class RandomController extends Controller
 {
     public function index()
     {
-        return Inertia::render('Projects/Index', [
-            'projects' => Project::with('status:id,name')->latest()->get(),
+        return Inertia::render('Projects/Project', [
+
         ]);
     }
-
 }
