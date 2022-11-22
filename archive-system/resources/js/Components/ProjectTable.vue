@@ -7,13 +7,13 @@
                         <thead class="bg-gray-50">
                             <tr class="text-center">
                                 <th scope="col" class="px-10 text-left w-40">
-                                    id
+                                    <button @click="sortBy('id')">id</button>
                                 </th>
                                 <th scope="col" class="text-left w-100">
-                                    Project
+                                    <button @click="sortBy('name')">Project</button>
                                 </th>
                                 <th scope="col" class="text-left">
-                                    Status
+                                    <button @click="sortBy('status.name')">Status</button>
                                 </th>
                                 <th scope="col" class="text-left">
                                     Link
@@ -47,11 +47,38 @@
 
 <script setup>
     import { ref, computed } from 'vue'
+    import { orderBy } from 'lodash'
 
     const props = defineProps(['projects']);
 
+    const sortedBy = ref(['status.name']);
+    const dir = ref(['asc']);
+
     const sortedProjects = computed(() => {
-        return props.projects;
+        return orderBy(props.projects, sortedBy.value, dir.value);
     });
+
+    function sortBy(sort)
+    {
+        // If the header is clicked twice change the direction, default to asc.
+        if(sortedBy.value == sort) {
+            changeDir();
+        } else {
+            dir.value = 'asc';
+        }
+
+        sortedBy.value = sort;
+    }
+
+    // Changes the order-direction.
+    function changeDir()
+    {
+        if(dir.value == 'asc')
+        {
+            dir.value = 'desc';
+        } else {
+            dir.value = 'asc';
+        }
+    }
 
 </script>
