@@ -1,7 +1,17 @@
 <template>
     <div class="">
         <div class="flex flex-wrap">
-            <input type="text" v-model="query"/>
+            <div class="w-full px-2 py-2 flex justify-between">
+                <div>
+                    <button
+                        class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+                        <a href="#"> Tilføj nyt projekt </a>
+                    </button>
+                </div>
+                <div>
+                    <input type="text" v-model="query" />
+                </div>
+            </div>
             <div class="w-full px-2 py-4">
                 <div class="max-w-full overflow-x-auto">
                     <table class="min-w-full divide-y divide-gray-300">
@@ -33,7 +43,8 @@
                                     {{ project.status.name }}
                                 </td>
                                 <td class="text-left">
-                                    <button class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+                                    <button
+                                        class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
                                         <a href="#"> Gå til projekt </a>
                                     </button>
                                 </td>
@@ -47,54 +58,50 @@
 </template>
 
 <script setup>
-    import { ref, computed } from 'vue'
-    import { orderBy, filter } from 'lodash'
+import { ref, computed } from 'vue'
+import { orderBy, filter } from 'lodash'
 
-    const query = ref("");
+const query = ref("");
 
-    const props = defineProps(['projects']);
-    const sortedBy = ref(['status.name']);
-    const dir = ref(['asc']);
+const props = defineProps(['projects']);
+const sortedBy = ref(['status.name']);
+const dir = ref(['asc']);
 
-    const sortedProjects = computed(() => {
-        let afterSearch = searchProjects(props.projects);
-        return orderBy(afterSearch, sortedBy.value, dir.value);
-    });
+const sortedProjects = computed(() => {
+    let afterSearch = searchProjects(props.projects);
+    return orderBy(afterSearch, sortedBy.value, dir.value);
+});
 
-    function searchProjects(list)
-    {
-        if(query.value != "") {
-            let result = filter(list, (elm)=>{
-                return elm.name.toLowerCase().includes(query.value.toLowerCase());
-            });
-            
-            return result;
-        } else {
-            return list;
-        }
+function searchProjects(list) {
+    if (query.value != "") {
+        let result = filter(list, (elm) => {
+            return elm.name.toLowerCase().includes(query.value.toLowerCase());
+        });
+
+        return result;
+    } else {
+        return list;
+    }
+}
+
+function sortBy(sort) {
+    // If the header is clicked twice change the direction, default to asc.
+    if (sortedBy.value == sort) {
+        changeDir();
+    } else {
+        dir.value = 'asc';
     }
 
-    function sortBy(sort)
-    {
-        // If the header is clicked twice change the direction, default to asc.
-        if(sortedBy.value == sort) {
-            changeDir();
-        } else {
-            dir.value = 'asc';
-        }
+    sortedBy.value = sort;
+}
 
-        sortedBy.value = sort;
+// Changes the order-direction.
+function changeDir() {
+    if (dir.value == 'asc') {
+        dir.value = 'desc';
+    } else {
+        dir.value = 'asc';
     }
-
-    // Changes the order-direction.
-    function changeDir()
-    {
-        if(dir.value == 'asc')
-        {
-            dir.value = 'desc';
-        } else {
-            dir.value = 'asc';
-        }
-    }
+}
 
 </script>
