@@ -1,6 +1,7 @@
 <template>
     <div class="">
         <div class="flex flex-wrap">
+            <input type="text" v-model="query"/>
             <div class="w-full px-2 py-4">
                 <div class="max-w-full overflow-x-auto">
                     <table class="min-w-full divide-y divide-gray-300">
@@ -47,16 +48,31 @@
 
 <script setup>
     import { ref, computed } from 'vue'
-    import { orderBy } from 'lodash'
+    import { orderBy, filter } from 'lodash'
+
+    const query = ref("");
 
     const props = defineProps(['projects']);
-
     const sortedBy = ref(['status.name']);
     const dir = ref(['asc']);
 
     const sortedProjects = computed(() => {
-        return orderBy(props.projects, sortedBy.value, dir.value);
+        let afterSearch = searchProjects(props.projects);
+        return orderBy(afterSearch, sortedBy.value, dir.value);
     });
+
+    function searchProjects(list)
+    {
+        if(query.value != "") {
+            let result = filter(list, (elm)=>{
+                return elm.name.toLowerCase().includes(query.value.toLowerCase());
+            });
+            
+            return result;
+        } else {
+            return list;
+        }
+    }
 
     function sortBy(sort)
     {
