@@ -34,7 +34,7 @@ Route::resource('projects', ProjectController::class)
     ->only(['index'])
     ->middleware(['auth']);
 
-Route::resource('project/{id}', RandomController::class)
+Route::resource('project', RandomController::class)
     ->only(['index'])
     ->middleware(['auth']);
 

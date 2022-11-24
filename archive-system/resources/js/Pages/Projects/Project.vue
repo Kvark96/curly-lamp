@@ -1,13 +1,25 @@
 <template>
 
-    <h1>HElloA</h1>
+    <Head title="Project + name" />
+
+        <AuthenticatedLayout>
+
+            <div>
+                <SingleProject :project="project" />
+            </div>
+
+        </AuthenticatedLayout>
+
 
 </template>
 
 <script setup>
-import ProjectTable from '@/Components/ProjectTable.vue';
+
+import SingleProject from '@/Components/SingleProject.vue';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { Head } from '@inertiajs/inertia-vue3';
+import { Head, Link } from '@inertiajs/inertia-vue3';
+
+defineProps(['project']);
 
 </script>
 
