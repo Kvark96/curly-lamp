@@ -3,7 +3,7 @@
         <div class="flex items-center justify-center">
             <div class="w-full px-2 py-4">
 
-                <h1>Projektejer</h1>
+                <h1>{{ props.project.name }}</h1>
 
                 <h1>Status</h1>
 
@@ -34,5 +34,7 @@
 
     import { ref, computed } from 'vue'
     import { Link } from '@inertiajs/inertia-vue3'
+
+    const props = defineProps(['project']);
 
 </script>
