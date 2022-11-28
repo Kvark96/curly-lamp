@@ -62,9 +62,9 @@ import { Link, useForm } from '@inertiajs/inertia-vue3';
 const props = defineProps(['leaders', 'statuses']);
 
 const form = useForm({
-    leader: null,
+    leader: props.leaders[0].name,
     name: null,
-    status: null,
+    status: props.statuses[0].name,
 })
 
 // TODO: Figure this out

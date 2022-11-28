@@ -3,13 +3,11 @@
         <div class="flex flex-wrap">
             <div class="w-full px-2 py-2 flex justify-between">
                 <div>
-                    <button @click="showModal.value=true"
+                    <button
                         class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
-                        <Link href="projects/add"> Tilføj nyt projekt</Link>
-                        <!-- <a href="{ route('projects/add') }"> Tilføj nyt projekt </a> -->
+                        <Link href="projects/add"> Tilføj nyt projekt </Link>
                     </button>
                 </div>
-                <!-- <AddProjectModal :showModal="showModal" v-show="showModal"></AddProjectModal> -->
                 <div class="input-group relative flex flex-wrap items-stretch">
                     <input type="text" v-model="query" class="form-control relative flex-auto min-w-0 block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" placeholder="Search"/>
                 </div>
