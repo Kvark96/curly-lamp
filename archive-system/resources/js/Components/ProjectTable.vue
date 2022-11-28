@@ -5,7 +5,8 @@
                 <div>
                     <button @click="showModal.value=true"
                         class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
-                        <a href="#"> Tilføj nyt projekt </a>
+                        <Link href="projects/add"> Tilføj nyt projekt</Link>
+                        <!-- <a href="{ route('projects/add') }"> Tilføj nyt projekt </a> -->
                     </button>
                 </div>
                 <!-- <AddProjectModal :showModal="showModal" v-show="showModal"></AddProjectModal> -->
@@ -59,9 +60,10 @@
 </template>
 
 <script setup>
+import { Link } from '@inertiajs/inertia-vue3';
 import { ref, computed } from 'vue'
 import { orderBy, filter } from 'lodash'
-import AddProjectModal from './AddProjectModal.vue';
+import AddProjectModal from './NewProject.vue';
 
 const showModal = ref(true);
 const query = ref("");

@@ -33,4 +33,8 @@ Route::resource('projects', ProjectController::class)
     ->only(['index'])
     ->middleware(['auth']);
 
+    // TODO: Add verification for user-type (needs to be project-leader or admin)
+Route::get('projects/add', [ProjectController::class, 'add'])
+    ->middleware(['auth']);
+
 require __DIR__.'/auth.php';
