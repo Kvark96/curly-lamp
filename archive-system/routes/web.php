@@ -30,7 +30,7 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::resource('projects', ProjectController::class)
-    ->only(['index'])
+    ->only(['index', 'store'])
     ->middleware(['auth']);
 
     // TODO: Add verification for user-type (needs to be project-leader or admin)

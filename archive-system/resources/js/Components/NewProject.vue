@@ -1,7 +1,7 @@
 <template>
     <div class="w-full py-10 px-10">
         <div class="md:flex md:items-center mb-6">
-            <form @submit.prevent="submit" class="w-full">
+            <form @submit.prevent="form.post(route('projects.store'))" class="w-full">
                 <div class="flex flex-wrap -mx-3 mb-6">
                     <div class="w-full px-3">
                         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
@@ -20,10 +20,11 @@
                             Leader
                         </label>
                         <div class="relative">
+                            <!-- <v-select :options="props.leaders" :reduce="leader => leader.id" label="leader" /> -->
                             <select
                                 class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                id="leader" v-model="form.leader">
-                                <option v-for="leader in props.leaders" :key="leader.id">{{ leader.name }}</option>
+                                id="leader_id" v-model="form.leader_id">
+                                <option v-for="leader in props.leaders" :key="leader.id" :value="leader.id">{{ leader.name }}</option>
                             </select>
                         </div>
                     </div>
@@ -35,8 +36,8 @@
                         <div class="relative">
                             <select
                                 class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                                id="status" v-model="form.status">
-                                <option v-for="status in props.statuses" :key="status.id">{{ status.name }}</option>
+                                id="status_id" v-model="form.status_id">
+                                <option v-for="status in props.statuses" :key="status.id" :value="status.id">{{ status.name }}</option>
                             </select>
                         </div>
                     </div>
@@ -61,21 +62,13 @@ import { Link, useForm } from '@inertiajs/inertia-vue3';
 
 const props = defineProps(['leaders', 'statuses']);
 
+// Sort of scuffed way to get the first element, but it works. In case of empty list, it returns undefined
 const form = useForm({
-    leader: props.leaders[0].name,
+    leader_id: props.leaders[0].id,
     name: null,
-    status: props.statuses[0].name,
+    status_id: props.statuses[0].id,
 })
 
-// TODO: Figure this out
-// form.defaults({
-//     leader: 'Oliver',
-//     status: 'active'
-// });
-
-function submit() {
-    console.log(form)
-}
 
 </script>
 
