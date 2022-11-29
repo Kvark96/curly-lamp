@@ -20,7 +20,6 @@
                             Leader
                         </label>
                         <div class="relative">
-                            <!-- <v-select :options="props.leaders" :reduce="leader => leader.id" label="leader" /> -->
                             <select
                                 class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                                 id="leader_id" v-model="form.leader_id">
@@ -62,7 +61,7 @@ import { Link, useForm } from '@inertiajs/inertia-vue3';
 
 const props = defineProps(['leaders', 'statuses']);
 
-// Sort of scuffed way to get the first element, but it works. In case of empty list, it returns undefined
+// Sort of scuffed way to get the first element, but it works. In case of empty list, it throws an error
 const form = useForm({
     leader_id: props.leaders[0].id,
     name: null,
