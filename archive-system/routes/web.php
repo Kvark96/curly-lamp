@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProjectController;
-use App\Http\Controllers\RandomController;
+use App\Http\Controllers\SingleProjectController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -34,8 +34,8 @@ Route::resource('projects', ProjectController::class)
     ->only(['index'])
     ->middleware(['auth']);
 
-Route::resource('project/{id}', RandomController::class)
-    ->only(['index'])
+Route::resource('project/{id}', SingleProjectController::class)
+    ->only(['index', 'store'])
     ->middleware(['auth']);
 
 require __DIR__.'/auth.php';

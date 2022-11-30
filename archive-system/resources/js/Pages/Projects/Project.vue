@@ -5,7 +5,7 @@
         <AuthenticatedLayout>
 
             <div>
-                <SingleProject :project="project" />
+                <SingleProject :project="project" :user="user"/>
             </div>
 
         </AuthenticatedLayout>
@@ -19,7 +19,7 @@ import SingleProject from '@/Components/SingleProject.vue';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head, Link } from '@inertiajs/inertia-vue3';
 
-defineProps(['project']);
+defineProps(['project', 'user']);
 
 </script>
 
