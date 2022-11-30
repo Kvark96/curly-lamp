@@ -14,7 +14,7 @@
             </div>
             <div class="w-full px-2 py-4">
                 <div class="max-w-full overflow-x-auto">
-                    <table class="min-w-full divide-y divide-gray-300">
+                    <table class="min-w-full divide-y divide-gray-300 rotate-90">
                         <thead class="bg-gray-50">
                             <tr class="text-center">
                                 <th scope="col" class="px-10 text-left w-40">
