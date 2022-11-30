@@ -11,16 +11,13 @@ use Inertia\Response;
 
 class SingleProjectController extends Controller
 {
-
-
     public function index(int $projectid): Response
     {
-        $project = Project::where('projects.id', $projectid)->with('status:id,name')->get()->first();
-        $leaderid = $project->leader_id;
+        $project = Project::where('projects.id', $projectid)->with(['status:id,name', 'leader:id,name'])->get()->first();
 
         return Inertia::render('Projects/Project', [
             'project' => $project,
-            'user' => User::find($leaderid),
+            'user' => $project->leader,
         ]);
     }
 
