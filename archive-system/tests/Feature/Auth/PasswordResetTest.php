@@ -18,7 +18,7 @@ class PasswordResetTest extends TestCase
     {
         parent::setUp();
 
-        $this->artisan('db:seed --class=DatabaseSeeder');
+        $this->artisan('db:seed --class=ProjectSeeder');
     }
 
     public function test_reset_password_link_screen_can_be_rendered()

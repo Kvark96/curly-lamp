@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\SingleProjectController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -35,6 +36,10 @@ Route::resource('projects', ProjectController::class)
 
     // TODO: Add verification for user-type (needs to be project-leader or admin)
 Route::get('projects/add', [ProjectController::class, 'add'])
+    ->middleware(['auth']);
+
+Route::resource('project/{id}', SingleProjectController::class)
+    ->only(['index', 'store'])
     ->middleware(['auth']);
 
 require __DIR__.'/auth.php';

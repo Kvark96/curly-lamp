@@ -20,7 +20,7 @@ class EmailVerificationTest extends TestCase
     {
         parent::setUp();
 
-        $this->artisan('db:seed --class=DatabaseSeeder');
+        $this->artisan('db:seed --class=ProjectSeeder');
     }
 
     public function test_email_verification_screen_can_be_rendered()

@@ -16,7 +16,7 @@ class PasswordConfirmationTest extends TestCase
     {
         parent::setUp();
 
-        $this->artisan('db:seed --class=DatabaseSeeder');
+        $this->artisan('db:seed --class=ProjectSeeder');
     }
 
     public function test_confirm_password_screen_can_be_rendered()
