@@ -15,7 +15,7 @@ class SingleProjectController extends Controller
 
     public function index(int $projectid): Response
     {
-        $project = Project::find($projectid)->with('status:id,name')->first();
+        $project = Project::where('projects.id', $projectid)->with('status:id,name')->get()->first();
         $leaderid = $project->leader_id;
 
         return Inertia::render('Projects/Project', [
