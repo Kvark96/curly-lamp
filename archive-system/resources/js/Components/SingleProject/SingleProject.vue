@@ -1,22 +1,12 @@
 <template>
     <ProjectInformationCard :project="project" :user="user"/>
-    
+
     <div class="flex-justify-center">
         <div class="w-full py-10 px-10">
             <div class="md:flex md:items-center mb-6">
                 <div class="w-full px-3">
                     <table class="min-w-full">
-                        <tr class="text-center">
-                            <Body>
-                                <Form action="" method="post" enctype="multipart/form-data">
-                                    Select a File to Upload
 
-                                <br>
-                                <Input type="file"></Input>
-                                </Form>
-                            </Body>
-
-                        </tr>
                     </table>
                 </div>
             </div>

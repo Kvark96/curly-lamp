@@ -15,7 +15,7 @@
 
 <script setup>
 
-import SingleProject from '@/Components/SingleProject.vue';
+import SingleProject from '@/Components/SingleProject/SingleProject.vue';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head, Link } from '@inertiajs/inertia-vue3';
 

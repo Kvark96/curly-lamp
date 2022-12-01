@@ -31,6 +31,14 @@ class ProjectSeeder extends Seeder
             'email' => 'test@example.com',
         ]);
 
+        for($i = 0; $i < 3; $i++) {
+            User::factory()->create([
+                'name' => 'Project Owner ' . $i,
+                'email' => 'po' . $i . '@gmail.com',
+                'type_id' => 2,
+            ]);
+        }
+
         Status::factory()->create(['name' => 'active']);
         Status::factory()->create(['name' => 'archived']);
 

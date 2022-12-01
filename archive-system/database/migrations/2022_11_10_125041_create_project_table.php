@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('name');
             $table->foreignId('leader_id')->constrained('users');
             $table->foreignId('status_id')->constrained();
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }
