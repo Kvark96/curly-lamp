@@ -5,15 +5,16 @@
                 <h1>{{ project.name }}</h1>
             </div>
             <div class=" border-black">
-                
+
             </div>
-            <div class=" border-black">Contact: {{ project.leader.name }}</div>
-            <div class=" border-black block tracking-wide text-gray-700"> {{ project.status.name }}</div>
+            <div class=" text-sm border-black text-gray-700"> {{ readableCreationDate }} </div>
+            <div class="text-left border-black text-gray-700"> Status: {{ project.status.name }}</div>
             <div class=" border-black"></div>
-            <div class=" text-sm border-black"> {{ readableCreationDate }} </div>
+            <div class=" border-black text-gray-700">Contact: {{ project.leader.name }}</div>
             <div class="col-span-3 text-left bg-slate-300 rounded px-2 py-2">
-                <p class="px-2 font-bold">Description</p>
-                <p class="px-4">
+                <!-- <p class="block uppercase tracking-wide text-gray-700 text-xs px-2 font-bold mb-2">Description</p> -->
+                <p class="px-2">
+                    {{ project.description }}
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                 </p>
             </div>
