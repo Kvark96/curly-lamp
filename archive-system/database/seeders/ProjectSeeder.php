@@ -47,9 +47,11 @@ class ProjectSeeder extends Seeder
         for($i = 0; $i < $numberOfProjects; $i++) {
             $project = Project::factory()->create();
             DB::table('project_user')->insert(['user_id' => $user->id, 'project_id' => $project->id]);
-            $folder = Folder::factory()->create(['project_id' => $project->id]);
-            $link = Link::factory()->create(['folder_id' => $folder->id]);
-            $file = File::factory()->create(['folder_id' => $folder->id]);
+            for($j = 0; $j < 6; $j++) {
+                $folder = Folder::factory()->create(['project_id' => $project->id]);
+                $link = Link::factory()->create(['folder_id' => $folder->id]);
+                $file = File::factory()->create(['folder_id' => $folder->id]);
+            }
         }
     }
 }

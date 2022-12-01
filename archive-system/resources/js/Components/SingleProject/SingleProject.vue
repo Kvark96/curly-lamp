@@ -1,13 +1,12 @@
 <template>
     <ProjectInformationCard :project="project" :user="user"/>
 
+    <ProjectFoldersCard :folders="folders"/>
+
     <div class="flex-justify-center">
         <div class="w-full py-10 px-10">
             <div class="md:flex md:items-center mb-6">
                 <div class="w-full px-3">
-                    <table class="min-w-full">
-
-                    </table>
                 </div>
             </div>
         </div>
@@ -43,11 +42,14 @@
 
 <script setup>
     import ProjectInformationCard from './ProjectInformationCard.vue';
+    import ProjectFoldersCard from './ProjectFoldersCard.vue';
     import { ref, computed } from 'vue'
     import { Link } from '@inertiajs/inertia-vue3'
 
-    const props = defineProps(['user', 'project']);
+    const props = defineProps(['user', 'project', 'folders']);
     const project = props.project;
     const user = props.user;
+    const folders = props.folders;
+    console.log(props);
 
 </script>

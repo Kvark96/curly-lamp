@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Folder;
 use App\Models\Project;
 use App\Models\User;
 use Exception;
@@ -14,10 +15,17 @@ class SingleProjectController extends Controller
     public function index(int $projectid): Response
     {
         $project = Project::where('projects.id', $projectid)->with(['status:id,name', 'leader:id,name'])->get()->first();
+        $folders = Folder::where('project_id', $projectid)
+            ->join('files', 'folders.id', '=', 'files.folder_id')
+            ->join('links', 'folders.id', '=', 'links.folder_id')
+            ->get();
+
+            dd($folders);
 
         return Inertia::render('Projects/Project', [
             'project' => $project,
             'user' => $project->leader,
+            'folders' => $folders,
         ]);
     }
 
