@@ -9,23 +9,24 @@ use Exception;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
 use Inertia\Response;
+use stdClass;
 
 class SingleProjectController extends Controller
 {
-    public function index(int $projectid): Response
+    public function index(int $projectid)//: Response
     {
-        $project = Project::where('projects.id', $projectid)->with(['status:id,name', 'leader:id,name'])->get()->first();
-        $folders = Folder::where('project_id', $projectid)
-            ->join('files', 'folders.id', '=', 'files.folder_id')
-            ->join('links', 'folders.id', '=', 'links.folder_id')
-            ->get();
+    }
 
-            dd($folders);
+    public function showProject(int $projectid): Response
+    {
+        $project = Project::where('projects.id', $projectid)->with(['status:id,name', 'leader:id,name', 'folders'])->get()->first();
+        $folders = Folder::where('project_id', $projectid)->with(['files:id,path', 'links:id,url'])->get();
+
 
         return Inertia::render('Projects/Project', [
+            'folders' => $folders,
             'project' => $project,
             'user' => $project->leader,
-            'folders' => $folders,
         ]);
     }
 

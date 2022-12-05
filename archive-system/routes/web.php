@@ -38,7 +38,10 @@ Route::resource('projects', ProjectController::class)
 Route::get('projects/add', [ProjectController::class, 'add'])
     ->middleware(['auth']);
 
-Route::resource('project/{id}', SingleProjectController::class)
+Route::get('project/{id}', [SingleProjectController::class, 'showProject'])
+    ->middleware('auth');
+
+Route::resource('project/{id}/something', SingleProjectController::class)
     ->only(['index', 'store'])
     ->middleware(['auth']);
 

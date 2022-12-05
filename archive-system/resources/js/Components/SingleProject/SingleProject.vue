@@ -47,9 +47,11 @@
     import { Link } from '@inertiajs/inertia-vue3'
 
     const props = defineProps(['user', 'project', 'folders']);
+
     const project = props.project;
     const user = props.user;
     const folders = props.folders;
-    console.log(props);
+
+    console.log(folders);
 
 </script>
