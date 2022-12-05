@@ -31,6 +31,18 @@ class ProjectSeeder extends Seeder
             'email' => 'test@example.com',
         ]);
 
+        $user1 = User::factory()->create([
+            'name' => 'Admin',
+            'email' => 'Admin@example.com',
+            'type_id' => '1',
+        ]);
+
+        $user2 = User::factory()->create([
+            'name' => 'Projectleader',
+            'email' => 'Leader@example.com',
+            'type_id' => '2',
+        ]);
+
         Status::factory()->create(['name' => 'active']);
         Status::factory()->create(['name' => 'archived']);
 
