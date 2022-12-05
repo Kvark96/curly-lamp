@@ -36,7 +36,7 @@ Route::resource('projects', ProjectController::class)
 
     // TODO: Add verification for user-type (needs to be project-leader or admin)
 Route::get('projects/add', [ProjectController::class, 'add'])
-    ->middleware(['auth']);
+    ->middleware(['verifyRole', 'auth']);
 
 Route::get('project/{id}', [SingleProjectController::class, 'showProject'])
     ->middleware('auth');

@@ -21,6 +21,7 @@ class ProjectController extends Controller
 
     public function store(Request $request): Response
     {
+
         $validated = $request->validate([
             'leader_id' => 'required|integer',
             'name' => 'required|string|max:255',
@@ -38,9 +39,11 @@ class ProjectController extends Controller
 
     public function add(): Response
     {
+
         return Inertia::render('Projects/Add', [
             'statuses' => Status::all(),
             'leaders' => User::with('type:id,name')->where('type_id', 2)->get(),
         ]);
+
     }
 }

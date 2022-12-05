@@ -2,7 +2,7 @@
     <div class="">
         <div class="flex flex-wrap">
             <div class="w-full px-2 py-2 flex justify-between">
-                <div>
+                <div v-if="($page.props.auth.user.type_id !== 3 )">
                     <button
                         class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
                         <Link href="projects/add"> Tilføj nyt projekt </Link>
