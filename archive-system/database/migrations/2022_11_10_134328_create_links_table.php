@@ -15,8 +15,9 @@ return new class extends Migration
     {
         Schema::create('links', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('folder_id')->constrained();
+            $table->foreignId('folder_id')->references('id')->on('folders');;
             $table->string('url');
+            $table->string('description');
             $table->timestamps();
         });
     }

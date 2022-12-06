@@ -12,6 +12,7 @@ use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class ProjectSeeder extends Seeder
 {
@@ -29,18 +30,21 @@ class ProjectSeeder extends Seeder
         $user = User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@example.com',
+            'password' => Hash::make('password'),
         ]);
 
         $user1 = User::factory()->create([
             'name' => 'Admin',
             'email' => 'Admin@example.com',
             'type_id' => '1',
+            'password' => Hash::make('password'),
         ]);
 
         $user2 = User::factory()->create([
             'name' => 'Projectleader',
             'email' => 'Leader@example.com',
             'type_id' => '2',
+            'password' => Hash::make('password'),
         ]);
 
         Status::factory()->create(['name' => 'active']);
