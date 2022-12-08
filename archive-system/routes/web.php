@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\FileController;
+use App\Http\Controllers\FolderController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\SingleProjectController;
 use Illuminate\Foundation\Application;
@@ -34,7 +36,6 @@ Route::resource('projects', ProjectController::class)
     ->only(['index', 'store'])
     ->middleware(['auth']);
 
-    // TODO: Add verification for user-type (needs to be project-leader or admin)
 Route::get('projects/add', [ProjectController::class, 'add'])
     ->middleware(['verifyRole', 'auth']);
 
@@ -43,6 +44,13 @@ Route::get('project/{id}', [SingleProjectController::class, 'showProject'])
 
 Route::resource('project/{id}/something', SingleProjectController::class)
     ->only(['index', 'store'])
+    ->middleware(['auth']);
+
+Route::get('project/addfile', [FileController::class, 'add'])
+    ->middleware(['auth']);
+
+Route::resource('project/{project_id}/{folder_id}/files', FileController::class)
+    ->only(['store', 'update'])
     ->middleware(['auth']);
 
 require __DIR__.'/auth.php';

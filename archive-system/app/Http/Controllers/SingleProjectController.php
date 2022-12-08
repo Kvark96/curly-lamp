@@ -22,7 +22,7 @@ class SingleProjectController extends Controller
         $project = Project::where('projects.id', $projectid)->with(['status:id,name', 'leader:id,name', 'folders'])->get()->first();
         $folders = Folder::where('project_id', $projectid)->with(['files', 'links'])->get();
 
-        return Inertia::render('Projects/Project', [
+        return Inertia::render('SingleProject/Project', [
             'folders' => $folders,
             'project' => $project,
             'user' => $project->leader,

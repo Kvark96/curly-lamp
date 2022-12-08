@@ -6,18 +6,12 @@
         </div>
         <div class="">
             <!-- BODY -->
-            <div class="py-3">
-                <div class="px-5 text-left">Files</div>
-            </div>
             <FolderContentList
                 class="px-5"
                 type="file"
                 :list="files"
             />
 
-            <div class="py-3">
-                <div class="px-5 text-left">Links</div>
-            </div>
             <FolderContentList
             class="px-5"
             type="link"

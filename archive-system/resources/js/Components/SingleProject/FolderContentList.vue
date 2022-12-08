@@ -1,5 +1,24 @@
 <template>
     <div class="w-full px-2 py-4">
+        <!-- Sort of wonky way to make a header, but it works -->
+        <div class="flex justify-between">
+            <div class="text-xl px-3 py-1.5">
+                {{ capitalize(props.type) }}s
+            </div>
+            <div>
+                <button
+                class="px-1 py-1.5 bg-blue-500 text-white font-semibold align-middle border border-transparent rounded">
+                    <Link href="/project/addfile">
+                        Add new {{ props.type }}
+                    </Link>
+                </button>
+            </div>
+            <div class="">
+                <input type="text" v-model="query"
+                    class="form-control relative flex-auto min-w-0 block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                    placeholder="Search" />
+            </div>
+        </div>
         <div class="max-w-full overflow-x-auto">
             <table class="min-w-full divide-y divide-slate-300 ">
                 <thead class="bg-gray-50">
@@ -34,8 +53,9 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, capitalize } from 'vue'
 import { orderBy, filter } from 'lodash'
+import { Link } from '@inertiajs/inertia-vue3';
 
 
 const props = defineProps(['type', 'list']);
@@ -50,16 +70,15 @@ const sortedList = computed(() => {
 });
 
 const header = computed(() => {
-    if(props.type == 'file') return 'path';
+    if (props.type == 'file') return 'path';
     return 'url';
 });
 
 function searchList(list) {
     if (query.value != "") {
         let result = filter(list, (elm) => {
-            return elm.name.toLowerCase().includes(query.value.toLowerCase());
+            return elm.description.toLowerCase().includes(query.value.toLowerCase()) || getPathOrUrl(elm).toLowerCase().includes(query.value.toLowerCase());
         });
-
         return result;
     } else {
         return list;
@@ -91,7 +110,7 @@ function readableCreationDate(item) {
 };
 
 function getPathOrUrl(item) {
-    if(props.type == 'file') return item.path;
+    if (props.type == 'file') return item.path;
     return item.url;
 }
 
