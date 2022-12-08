@@ -57,13 +57,12 @@
     </div>
 </template>
 
+
 <script setup>
 import { Link } from '@inertiajs/inertia-vue3';
 import { ref, computed } from 'vue'
 import { orderBy, filter } from 'lodash'
-import AddProjectModal from './NewProject.vue';
 
-const showModal = ref(true);
 const query = ref("");
 
 const props = defineProps(['projects']);

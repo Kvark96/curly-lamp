@@ -19,6 +19,7 @@ class LinkFactory extends Factory
         return [
             'folder_id' => 1,
             'url' => '/totally-real-url/file.php',
+            'description'=> 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
         ];
     }
 }

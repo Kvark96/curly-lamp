@@ -12,6 +12,7 @@ use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class ProjectSeeder extends Seeder
 {
@@ -29,18 +30,21 @@ class ProjectSeeder extends Seeder
         $user = User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@example.com',
+            'password' => Hash::make('password'),
         ]);
 
         $user1 = User::factory()->create([
             'name' => 'Admin',
             'email' => 'Admin@example.com',
             'type_id' => '1',
+            'password' => Hash::make('password'),
         ]);
 
         $user2 = User::factory()->create([
             'name' => 'Projectleader',
             'email' => 'Leader@example.com',
             'type_id' => '2',
+            'password' => Hash::make('password'),
         ]);
 
         Status::factory()->create(['name' => 'active']);
@@ -51,9 +55,23 @@ class ProjectSeeder extends Seeder
         for($i = 0; $i < $numberOfProjects; $i++) {
             $project = Project::factory()->create();
             DB::table('project_user')->insert(['user_id' => $user->id, 'project_id' => $project->id]);
-            $folder = Folder::factory()->create(['project_id' => $project->id]);
-            $link = Link::factory()->create(['folder_id' => $folder->id]);
-            $file = File::factory()->create(['folder_id' => $folder->id]);
+            for($j = 0; $j < 6; $j++) {
+                $folder = Folder::factory()->create(['project_id' => $project]);
+
+                for($k = 0; $k < 6; $k++)
+                {
+                    $link = Link::factory()->create([
+                        'folder_id' => $folder,
+                        'url' => '/' . $folder->id . '/' . $k+1,
+                    ]);
+
+                    $file = File::factory()->create([
+                        'folder_id' => $folder,
+                        'path' => '/' . $folder->id . '/' . $k+1,
+                    ]);
+
+                }
+            }
         }
     }
 }

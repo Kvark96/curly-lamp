@@ -4,8 +4,7 @@
             <form @submit.prevent="form.post(route('projects.store'))" class="w-full">
                 <div class="flex flex-wrap -mx-3 mb-6">
                     <div class="w-full px-3">
-                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                            for="grid-password">
+                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
                             Project Name
                         </label>
                         <input
@@ -15,8 +14,7 @@
                 </div>
                 <div class="flex flex-wrap -mx-3 mb-6">
                     <div class="w-full md:w-1/2 px-3">
-                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                            for="grid-state">
+                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
                             Leader
                         </label>
                         <div class="relative">
@@ -28,8 +26,7 @@
                         </div>
                     </div>
                     <div class="w-full md:w-1/2 px-3">
-                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                            for="grid-last-name">
+                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
                             Status
                         </label>
                         <div class="relative">

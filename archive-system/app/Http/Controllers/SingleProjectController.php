@@ -2,25 +2,30 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Folder;
 use App\Models\Project;
 use App\Models\User;
 use Exception;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
 use Inertia\Response;
+use stdClass;
 
 class SingleProjectController extends Controller
 {
-
-
-    public function index(int $projectid): Response
+    public function index(int $projectid)//: Response
     {
-        $project = Project::where('projects.id', $projectid)->with('status:id,name')->get()->first();
-        $leaderid = $project->leader_id;
+    }
 
-        return Inertia::render('Projects/Project', [
+    public function showProject(int $projectid): Response
+    {
+        $project = Project::where('projects.id', $projectid)->with(['status:id,name', 'leader:id,name', 'folders'])->get()->first();
+        $folders = Folder::where('project_id', $projectid)->with(['files', 'links'])->get();
+
+        return Inertia::render('SingleProject/Project', [
+            'folders' => $folders,
             'project' => $project,
-            'user' => User::find($leaderid),
+            'user' => $project->leader,
         ]);
     }
 

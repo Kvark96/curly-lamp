@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('folders', function (Blueprint $table) {
             $table->id();
             $table->foreignId('project_id')->constrained();
+            $table->string('name');
             $table->timestamps();
         });
     }

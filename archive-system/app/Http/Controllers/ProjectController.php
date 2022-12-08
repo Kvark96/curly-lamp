@@ -8,17 +8,18 @@ use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Inertia\Response;
 
 class ProjectController extends Controller
 {
-    public function index()
+    public function index(): Response
     {
         return Inertia::render('Projects/Index', [
             'projects' => Project::with('status:id,name')->latest()->get(),
         ]);
     }
 
-    public function store(Request $request)
+    public function store(Request $request): Response
     {
 
         $validated = $request->validate([
@@ -36,7 +37,7 @@ class ProjectController extends Controller
         return $this->index();
     }
 
-    public function add()
+    public function add(): Response
     {
 
         return Inertia::render('Projects/Add', [
