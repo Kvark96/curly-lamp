@@ -26,13 +26,9 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
 Route::resource('projects', ProjectController::class)
     ->only(['index', 'store'])
-    ->middleware(['auth']);
+    ->middleware(['auth', 'verified']);
 
     // TODO: Add verification for user-type (needs to be project-leader or admin)
 Route::get('projects/add', [ProjectController::class, 'add'])

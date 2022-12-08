@@ -20,7 +20,7 @@ defineProps({
 
     <div class="grid place-items-center h-screen">
         <div v-if="canLogin" class="hidden fixed top-10 px-6 py-4 sm:block">
-            <Link v-if="$page.props.auth.user" :href="route('dashboard')" class="text-xl text-lime-700 dark:text-lime-500 underline">Dashboard</Link>
+            <Link v-if="$page.props.auth.user" :href="route('projects.index')" class="text-xl text-lime-700 dark:text-lime-500 underline">Project</Link>
 
             <template v-else>
                 <Link :href="route('login')" class="text-xl text-lime-700 dark:text-lime-500 underline">Log in</Link>
