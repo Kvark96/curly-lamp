@@ -21,7 +21,7 @@ const showingNavigationDropdown = ref(false);
                             <!-- Logo -->
                             <div class="shrink-0 flex items-center">
                                 <Link :href="route('projects.index')">
-                                    <ApplicationLogo class="block h-9 w-auto" />
+                                    <ApplicationLogo class="object-scale-down h-12 w-24" />
                                 </Link>
                             </div>
 

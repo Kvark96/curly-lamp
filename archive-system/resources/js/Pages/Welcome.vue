@@ -1,6 +1,5 @@
 <script setup>
 import { Head, Link } from '@inertiajs/inertia-vue3';
-import SDCLogo from '../../assets/SDClogo.png';
 
 defineProps({
     canLogin: Boolean,
@@ -10,25 +9,24 @@ defineProps({
 </script>
 
 <template>
-    <Head title="Welcome" />
 
-        <div class="grid place-items-center h-screen">
-            <div class="hidden fixed top-25 px-6 py-4 sm:block">
-                    PICTURE LOADING :)
+    <Head title="Welcome" />
+        <div v-if="$page.props.auth.user"></div>
+        <div v-else class="fixed inset-1/4">
+            <img class="object-scale-down h-120 w-240" src="../../assets/SDC_logo_rgb.png" />
+        </div>
+
+        <div v-if="canLogin">
+            <Link v-if="$page.props.auth.user" :href="route('projects.index')"
+            class="fixed inset-1/4">
+            <img src="../../assets/SDC_logo_rgb.png"
+            />
+            </Link>
+
+            <div v-else class="fixed inset-x-1/3 px-52 py-40">
+                <Link :href="route('login')" class="text-xl text-cyan-600 underline">Log in</Link>
+                <Link v-if="canRegister" :href="route('register')" class="ml-4 text-xl text-cyan-900 underline">Register</Link>
             </div>
         </div>
 
-    <div class="grid place-items-center h-screen">
-        <div v-if="canLogin" class="hidden fixed top-10 px-6 py-4 sm:block">
-            <Link v-if="$page.props.auth.user" :href="route('projects.index')" class="text-xl text-lime-700 dark:text-lime-500 underline">Project</Link>
-
-            <template v-else>
-                <Link :href="route('login')" class="text-xl text-lime-700 dark:text-lime-500 underline">Log in</Link>
-
-                <Link v-if="canRegister" :href="route('register')" class="ml-4 text-xl text-lime-700 dark:text-lime-500 underline">Register</Link>
-            </template>
-        </div>
-
-
-    </div>
 </template>
