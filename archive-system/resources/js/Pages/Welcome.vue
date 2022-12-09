@@ -24,8 +24,10 @@ defineProps({
             </Link>
 
             <div v-else class="fixed inset-x-1/3 px-52 py-40">
-                <Link :href="route('login')" class="text-xl text-cyan-600 underline">Log in</Link>
-                <Link v-if="canRegister" :href="route('register')" class="ml-4 text-xl text-cyan-900 underline">Register</Link>
+                <button class="bg-transparent hover:bg-cyan-600 text-cyan-600 font-semibold m-2 hover:text-white
+                    py-1 px-1 border border-cyan-600 hover:border-transparent rounded"><Link :href="route('login')">Log in</Link></button>
+                <button v-if="canRegister" class="bg-transparent hover:bg-cyan-900 text-cyan-900 font-semibold m-2 hover:text-white
+                    py-1 px-1 border border-cyan-900 hover:border-transparent rounded"><Link :href="route('register')">Register</Link></button>
             </div>
         </div>
 
