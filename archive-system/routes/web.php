@@ -28,13 +28,9 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
 Route::resource('projects', ProjectController::class)
     ->only(['index', 'store'])
-    ->middleware(['auth']);
+    ->middleware(['auth', 'verified']);
 
 Route::get('projects/add', [ProjectController::class, 'add'])
     ->middleware(['verifyRole', 'auth']);
