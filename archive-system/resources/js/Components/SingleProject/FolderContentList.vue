@@ -5,14 +5,6 @@
             <div class="text-xl px-3 py-1.5">
                 {{ capitalize(props.type) }}s
             </div>
-            <div>
-                <button
-                class="px-1 py-1.5 bg-blue-500 text-white font-semibold align-middle border border-transparent rounded">
-                    <Link href="/project/addfile">
-                        Add new {{ props.type }}
-                    </Link>
-                </button>
-            </div>
             <div class="">
                 <input type="text" v-model="query"
                     class="form-control relative flex-auto min-w-0 block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"

@@ -1,34 +1,50 @@
 <template>
-    <div v-if="folder" class="py-5 py-5 bg-slate-200 border border-slate-200 rounded">
-        <!-- HEADER -->
-        <div class="text-2xl font-bold text-gray-700 bg-slate-300 py-2">
-            {{ folder.name }}
-        </div>
-        <div class="">
-            <!-- BODY -->
-            <FolderContentList
-                class="px-5"
-                type="file"
-                :list="files"
-            />
+    <div>
+        <div v-if="folder" class="py-5 py-5 bg-slate-200 border border-slate-200 rounded">
+            <div class="text-2xl font-bold text-gray-700 bg-slate-300 py-2">
+                {{ folder.name }}
+            </div>
+            <div class="">
+                <!-- Files -->
+                <FolderContentList class="px-5" type="file" :list="files" />
+                <FolderAddFile v-if="isAddingFile" @cancel="toggleForms('file')"/>
+                <div v-else="">
+                    <button @click="toggleForms('file')" class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"> Add File </button>
+                </div>
 
-            <FolderContentList
-            class="px-5"
-            type="link"
-            :list="links"
-            />
+                <!-- Links -->
+                <FolderContentList class="px-5" type="link" :list="links" />
+                <FolderAddLink v-if="isAddingLink" @cancel="toggleForms('link')"/>
+                <button @click="toggleForms('link')" class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"> Add Link </button>
+            </div>
         </div>
     </div>
 </template>
 
 <script setup>
+import { ref } from 'vue';
 import FolderContentList from './FolderContentList.vue';
+import FolderAddFile from './FolderAddFile.vue';
+import FolderAddLink from './FolderAddLink.vue';
 
 const props = defineProps(['folder']);
-const folder = props.folder;
 
+const folder = props.folder;
 const files = folder.files;
 const links = folder.links;
+
+const isAddingFile = ref(false);
+const isAddingLink = ref(false);
+
+// Winner of the 2022 'Worst Naming Convention'-award!
+// The trophy is proudly displayed at the bottom of my trashcan.
+function toggleForms(entityType){
+    if(entityType == 'file') {
+        isAddingFile.value = !isAddingFile.value;
+    } else if(entityType == 'link') {
+        isAddingLink.value = !isAddingLink.value;
+    }
+}
 
 console.log(folder);
 

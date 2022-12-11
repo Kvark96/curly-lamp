@@ -8,6 +8,7 @@ use App\Models\User;
 use Exception;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\URL;
 use Inertia\Response;
 use stdClass;
 
@@ -27,6 +28,11 @@ class SingleProjectController extends Controller
             'project' => $project,
             'user' => $project->leader,
         ]);
+    }
+
+    public function addFile(Folder $folder)
+    {
+        return Inertia::render('SingleProject/AddFile', ['folder' => $folder]);
     }
 
 

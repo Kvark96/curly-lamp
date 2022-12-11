@@ -42,15 +42,23 @@ Route::get('projects/add', [ProjectController::class, 'add'])
 Route::get('project/{id}', [SingleProjectController::class, 'showProject'])
     ->middleware('auth');
 
-Route::resource('project/{id}/something', SingleProjectController::class)
-    ->only(['index', 'store'])
-    ->middleware(['auth']);
+Route::get('project/{id}/add-file', function () {
+    return Inertia::render('SingleProject/AddFile');
+});
 
-Route::get('project/addfile', [FileController::class, 'add'])
-    ->middleware(['auth']);
+Route::get('project/{id}/add-link', function () {
+    return Inertia::render('SingleProject/AddLink');
+});
 
-Route::resource('project/{project_id}/{folder_id}/files', FileController::class)
-    ->only(['store', 'update'])
-    ->middleware(['auth']);
 
-require __DIR__.'/auth.php';
+
+// Route::resource('project/{id}/something', SingleProjectController::class)
+//     ->only(['index', 'store'])
+//     ->middleware(['auth']);
+
+
+// Route::resource('project/{project_id}/{folder_id}/files', FileController::class)
+//     ->only(['store', 'update'])
+//     ->middleware(['auth']);
+
+require __DIR__ . '/auth.php';

@@ -45,7 +45,7 @@
                                 <td class="text-left">
 
                                     <button class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
-                                        <a :href="'project/' + project.id" :project='project'>Go to Project</a>
+                                        <Link :href="'project/' + project.id" :project='project'>Go to Project</Link>
                                     </button>
                                 </td>
                             </tr>
