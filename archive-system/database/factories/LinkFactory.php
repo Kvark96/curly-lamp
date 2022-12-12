@@ -18,7 +18,7 @@ class LinkFactory extends Factory
     {
         return [
             'folder_id' => 1,
-            'url' => '/totally-real-url/file.php',
+            'url' => str_replace(' ', '-', fake()->sentence(3, true)) . '.com',
             'description'=> 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
         ];
     }

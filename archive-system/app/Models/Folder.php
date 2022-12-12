@@ -11,12 +11,19 @@ class Folder extends Model
 
     protected $fillable = [
         'name',
-        'project_id'
+        'project_id',
+        'type',
+        'parent_id',
     ];
 
     public function project()
     {
         return $this->belongsTo(Project::class);
+    }
+
+    public function parent()
+    {
+        return $this->parent_id;
     }
 
     public function links()

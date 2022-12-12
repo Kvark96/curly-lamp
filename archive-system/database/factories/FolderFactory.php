@@ -19,7 +19,9 @@ class FolderFactory extends Factory
     {
         return [
             'project_id' => Project::all()->first(),
-            'name' => 'no-name',
+            'name' => fake()->sentence($nbWords = 2, $variableNbWords = false),
+            'type' => 'outer',
+            'parent_id' => null,
         ];
     }
 }

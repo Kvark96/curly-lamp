@@ -14,14 +14,11 @@ use stdClass;
 
 class SingleProjectController extends Controller
 {
-    public function index(int $projectid)//: Response
-    {
-    }
-
     public function showProject(int $projectid): Response
     {
         $project = Project::where('projects.id', $projectid)->with(['status:id,name', 'leader:id,name', 'folders'])->get()->first();
         $folders = Folder::where('project_id', $projectid)->with(['files', 'links'])->get();
+        $folders = $folders->groupBy('type');
 
         return Inertia::render('SingleProject/Project', [
             'folders' => $folders,

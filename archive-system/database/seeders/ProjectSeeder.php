@@ -60,16 +60,21 @@ class ProjectSeeder extends Seeder
 
                 for($k = 0; $k < 6; $k++)
                 {
-                    $link = Link::factory()->create([
-                        'folder_id' => $folder,
-                        'url' => '/' . $folder->id . '/' . $k+1,
+                    $subfolder = Folder::factory()->create([
+                        'project_id' => $project,
+                        'parent_id' => $folder->id,
+                        'type' => 'inner',
                     ]);
+                    for($q = 0; $q < 6; $q++)
+                    {
+                        $link = Link::factory()->create([
+                            'folder_id' => $subfolder,
+                        ]);
 
-                    $file = File::factory()->create([
-                        'folder_id' => $folder,
-                        'path' => '/' . $folder->id . '/' . $k+1,
-                    ]);
-
+                        $file = File::factory()->create([
+                            'folder_id' => $subfolder,
+                        ]);
+                    }
                 }
             }
         }

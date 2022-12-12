@@ -7,15 +7,21 @@
             <div class="">
                 <!-- Files -->
                 <FolderContentList class="px-5" type="file" :list="files" />
-                <FolderAddFile v-if="isAddingFile" @cancel="toggleForms('file')"/>
+
+                <div v-if="isAddingFile" class="flex justify-center">
+                    <FolderAddFile class="w-1/3" @cancel="toggleForms('file')"/>
+                </div>
+
                 <div v-else="">
                     <button @click="toggleForms('file')" class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"> Add File </button>
                 </div>
 
                 <!-- Links -->
                 <FolderContentList class="px-5" type="link" :list="links" />
-                <FolderAddLink v-if="isAddingLink" @cancel="toggleForms('link')"/>
-                <button @click="toggleForms('link')" class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"> Add Link </button>
+                <div v-if="isAddingLink" class="flex justify-center">
+                    <FolderAddLink class="w-1/3" @cancel="toggleForms('link')"/>
+                </div>
+                <button v-else="" @click="toggleForms('link')" class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"> Add Link </button>
             </div>
         </div>
     </div>
