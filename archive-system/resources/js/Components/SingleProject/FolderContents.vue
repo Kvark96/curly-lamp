@@ -9,7 +9,7 @@
                 <FolderContentList class="px-5" type="file" :list="files" />
 
                 <div v-if="isAddingFile" class="flex justify-center">
-                    <FolderAddFile class="w-1/3" @cancel="toggleForms('file')"/>
+                    <FolderAddFile class="w-96" @cancel="toggleForms('file')" :folder="folder"/>
                 </div>
 
                 <div v-else="">
@@ -19,7 +19,7 @@
                 <!-- Links -->
                 <FolderContentList class="px-5" type="link" :list="links" />
                 <div v-if="isAddingLink" class="flex justify-center">
-                    <FolderAddLink class="w-1/3" @cancel="toggleForms('link')"/>
+                    <FolderAddLink class="w-96" @cancel="toggleForms('link')" :folder="folder"/>
                 </div>
                 <button v-else="" @click="toggleForms('link')" class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"> Add Link </button>
             </div>
@@ -42,8 +42,6 @@ const links = folder.links;
 const isAddingFile = ref(false);
 const isAddingLink = ref(false);
 
-// Winner of the 2022 'Worst Naming Convention'-award!
-// The trophy is proudly displayed at the bottom of my trashcan.
 function toggleForms(entityType){
     if(entityType == 'file') {
         isAddingFile.value = !isAddingFile.value;
@@ -51,7 +49,4 @@ function toggleForms(entityType){
         isAddingLink.value = !isAddingLink.value;
     }
 }
-
-console.log(folder);
-
 </script>

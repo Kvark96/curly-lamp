@@ -18,7 +18,8 @@ class FileFactory extends Factory
     {
         return [
             'folder_id' => 1,
-            'path' => str_replace(' ', '-', fake()->sentence(3, true)) . '.pdf',
+            'name' => str_replace(' ', '-', fake()->sentence(3, true)) . '.pdf',
+            'path' => ' ',
             'description'=> 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
         ];
     }

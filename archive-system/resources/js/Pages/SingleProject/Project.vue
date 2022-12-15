@@ -26,11 +26,10 @@
 
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { Head, Link } from '@inertiajs/inertia-vue3';
+import { Head } from '@inertiajs/inertia-vue3';
 
 import ProjectInformationCard from '@/Components/SingleProject/ProjectInformationCard.vue';
 import ProjectFoldersCard from '@/Components/SingleProject/ProjectFoldersCard.vue';
-
 
 const props = defineProps(['user', 'project', 'folders']);
 

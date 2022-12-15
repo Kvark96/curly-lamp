@@ -11,8 +11,8 @@
                     placeholder="Search" />
             </div>
         </div>
-        <div class="max-w-full overflow-x-auto">
-            <table class="min-w-full divide-y divide-slate-300 ">
+        <div class="">
+            <table class="min-w-full divide-y divide-slate-300">
                 <thead class="bg-gray-50">
                     <tr class="text-center">
                         <th scope="col" class="w-1/6">
@@ -31,10 +31,15 @@
                         <td class="w-1/6">
                             {{ readableCreationDate(link) }}
                         </td>
-                        <td class="w-1/3">
-                            {{ getPathOrUrl(link) }}
+                        <td class="max-w-sm px-5 text-ellipsis overflow-hidden" :title="getPathOrUrl(link)">
+                            <a :href="'//' + getPathOrUrl(link)" :target="_blank" v-if="props.type=='link'">
+                                {{ getPathOrUrl(link) }}
+                            </a>
+                            <div v-else>
+                                {{ getPathOrUrl(link) }}
+                            </div>
                         </td>
-                        <td class="text-left w-1/2">
+                        <td class="text-left text-ellipsis overflow-hidden whitespace-auto">
                             {{ link.description }}
                         </td>
                     </tr>
@@ -62,7 +67,7 @@ const sortedList = computed(() => {
 });
 
 const header = computed(() => {
-    if (props.type == 'file') return 'path';
+    if (props.type == 'file') return 'name';
     return 'url';
 });
 
@@ -102,7 +107,7 @@ function readableCreationDate(item) {
 };
 
 function getPathOrUrl(item) {
-    if (props.type == 'file') return item.path;
+    if (props.type == 'file') return item.name;
     return item.url;
 }
 

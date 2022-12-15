@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\FolderController;
+use App\Http\Controllers\LinkController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\SingleProjectController;
 use Illuminate\Foundation\Application;
@@ -45,6 +46,14 @@ Route::get('project/{id}/add-file', function () {
 Route::get('project/{id}/add-link', function () {
     return Inertia::render('SingleProject/AddLink');
 });
+
+Route::resource('files', FileController::class)
+    ->only(['store'])
+    ->middleware('auth');
+
+Route::resource('links', LinkController::class)
+    ->only(['store'])
+    ->middleware('auth');
 
 
 

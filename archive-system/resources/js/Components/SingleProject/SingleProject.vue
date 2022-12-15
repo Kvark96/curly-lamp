@@ -43,7 +43,6 @@
 <script setup>
     import ProjectInformationCard from './ProjectInformationCard.vue';
     import ProjectFoldersCard from './ProjectFoldersCard.vue';
-    import { ref, computed } from 'vue'
     import { Link } from '@inertiajs/inertia-vue3'
 
     const props = defineProps(['user', 'project', 'folders']);
@@ -51,7 +50,5 @@
     const project = props.project;
     const user = props.user;
     const folders = props.folders;
-
-    console.log(folders);
 
 </script>

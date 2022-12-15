@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('files', function (Blueprint $table) {
             $table->id();
             $table->foreignId('folder_id')->references('id')->on('folders');
+            $table->string('name');
             $table->string('path');
             $table->string('description');
             $table->timestamps();

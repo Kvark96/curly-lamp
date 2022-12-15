@@ -31,25 +31,4 @@ class SingleProjectController extends Controller
     {
         return Inertia::render('SingleProject/AddFile', ['folder' => $folder]);
     }
-
-
-    //Change project from Active to Archived
-
-    // public function store(Request $request): Response
-    // {
-
-    //     //Validate usertype
-
-    //     /* $validated = $request->validate([
-
-    //     ]); */
-
-    //     try {
-    //         $project = Project::updateOrCreate($validated);
-    //         $project->users()->attach($validated['leader_id']);
-    //     } catch (Exception $e) {
-    //         // dd($e);
-    //     }
-    //     return $this->index();
-    // }
 }

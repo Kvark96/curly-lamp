@@ -12,7 +12,8 @@ class Link extends Model
     protected $fillable = [
         'name',
         'folder_id',
-        'url'
+        'url',
+        'description'
     ];
 
     public function folder()
