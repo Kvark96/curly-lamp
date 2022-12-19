@@ -8,6 +8,7 @@ use App\Http\Controllers\SingleProjectController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use Symfony\Component\Console\SingleCommandApplication;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,6 +40,13 @@ Route::get('projects/add', [ProjectController::class, 'add'])
 Route::get('project/{id}', [SingleProjectController::class, 'showProject'])
     ->middleware('auth');
 
+Route::resource('project', SingleProjectController::class)
+    ->only(['update'])
+    ->middleware(['verifyRole', 'auth']);
+
+Route::post('project', [SingleProjectController::class, 'addUsers'])
+    ->middleware('auth');
+
 Route::get('project/{id}/add-file', function () {
     return Inertia::render('SingleProject/AddFile');
 });
@@ -46,6 +54,9 @@ Route::get('project/{id}/add-file', function () {
 Route::get('project/{id}/add-link', function () {
     return Inertia::render('SingleProject/AddLink');
 });
+
+Route::resource('folders', FolderController::class)
+    ->only(['store']);
 
 Route::resource('files', FileController::class)
     ->only(['store'])

@@ -1,7 +1,132 @@
 <template>
+    <div class="w-full">
+        <div class="flex justify-between bg-slate-300 py-1.5 px-5">
+            <div class="font-bold text-xl py-1.5 px-5 bg-slate-300">Add Users</div>
+            <div class="bg-slate-300 text-left"><input class="rounded" v-model="query" type="text"
+                    placeholder="Search ..." /></div>
+        </div>
+        <div class="px-5">
+            <table class="w-full divide-y divide-gray-300">
+                <thead class="bg-gray-50">
+                    <tr class="text-left">
+                        <th class="w-1/6">id</th>
+                        <th class="w-2/6">Name</th>
+                        <th class="w-2/6">Email</th>
+                        <th class="w-1/6"></th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-200 bg-white content-center">
+                    <tr v-for="user in props.users" :key="user.id">
+                        <td>{{ user.id }}</td>
+                        <td>{{ user.name }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>
+                            <button @click="addUser(user)"
+                                class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white px-1 border border-blue-500 hover:border-transparent rounded">
+                                Add
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div v-if="hasSelected">
+                <div class="py-1.5 font-bold text-sm">
+                    Added users
+                </div>
+                <table class="w-full divide-y divide-gray-300">
+                    <thead class="bg-gray-50">
+                        <tr class="text-left">
+                            <th class="w-1/6">id</th>
+                            <th class="w-2/6">Name</th>
+                            <th class="w-2/6">Email</th>
+                            <th class="w-1/6"></th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200 bg-white content-center">
+                        <tr v-for="user in selectedUsers" :key="user.id">
+                            <td>{{ user.id }}</td>
+                            <td>{{ user.name }}</td>
+                            <td>{{ user.email }}</td>
+                            <td>
+                                <button @click="removeUser(user)"
+                                    class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white px-1 border border-blue-500 hover:border-transparent rounded">
+                                    Remove
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="w-full flex justify-center py-5">
+                    <form @submit.prevent="form.post(route('project.update'))">
+                        <button type="submit"
+                            class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white px-5 py-1.5 border border-blue-500 hover:border-transparent rounded">
+                            Add
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <div class="w-full py-5 flex justify-center">
+                <button @click="$emit('cancel')"
+                    class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white px-5 py-1.5 border border-blue-500 hover:border-transparent rounded">
+                    Cancel
+                </button>
+            </div>
 
+            <div class="py-20"></div>
+        </div>
+    </div>
 </template>
 
 <script setup>
+import { ref } from 'vue';
+import { useForm } from '@inertiajs/inertia-vue3';
 
+const query = ref('');
+const props = defineProps(['users', 'project']);
+const selectedUsers = ref([]);
+const hasSelected = ref(false);
+
+const form = useForm({
+    users: selectedUsers.value,
+    project: props.project,
+});
+
+function addUser(user) {
+    selectedUsers.value.push(user);
+    hasSelected.value = (selectedUsers.value.length != 0);
+}
+
+function removeUser(user) {
+    let index = findUser(user.id);
+    console.log(index);
+    if (index != -1) {
+        selectedUsers.value.splice(index, 1);
+    }
+    hasSelected.value = (selectedUsers.value.length != 0);
+}
+
+function findUser(id) {
+    for (let i = 0; i < selectedUsers.value.length; i++) {
+        if (selectedUsers.value[i].id == id) return i;
+    }
+    return -1;
+}
+
+const users = [
+    {
+        id: 1,
+        name: 'Martin',
+        email: 'martin@gmail.com'
+    },
+    {
+        id: 2,
+        name: 'Hans',
+        email: 'hans@gmail.com'
+    },
+    {
+        id: 3,
+        name: 'Peter',
+        email: 'peter@gmail.com'
+    }
+];
 </script>

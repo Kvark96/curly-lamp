@@ -6,6 +6,7 @@ use App\Models\Folder;
 use App\Models\Project;
 use App\Models\User;
 use Exception;
+use Illuminate\Http\RedirectResponse;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
@@ -20,15 +21,31 @@ class SingleProjectController extends Controller
         $folders = Folder::where('project_id', $projectid)->with(['files', 'links'])->get();
         $folders = $folders->groupBy('type');
 
+        $allUsers = User::all()->groupBy('type_id');
+        $users = $allUsers[3];
+
         return Inertia::render('SingleProject/Project', [
             'folders' => $folders,
             'project' => $project,
-            'user' => $project->leader,
+            'leader' => $project->leader,
+            'users' => $users,
         ]);
     }
 
-    public function addFile(Folder $folder)
+    public function addFile(Folder $folder): Response
     {
         return Inertia::render('SingleProject/AddFile', ['folder' => $folder]);
+    }
+
+    public function addUsers(Request $request): RedirectResponse
+    {
+        dd($request);
+        return redirect()->back();
+    }
+
+    public function update(Request $request)
+    {
+        dd($request);
+        return redirect()->back();
     }
 }
