@@ -38,14 +38,16 @@ Route::get('projects/add', [ProjectController::class, 'add'])
     ->middleware(['verifyRole', 'auth']);
 
 Route::get('project/{id}', [SingleProjectController::class, 'showProject'])
-    ->middleware('auth');
+    ->middleware('auth')
+    ->name('project');
 
 Route::resource('project', SingleProjectController::class)
     ->only(['update'])
     ->middleware(['verifyRole', 'auth']);
 
-Route::post('project', [SingleProjectController::class, 'addUsers'])
-    ->middleware('auth');
+Route::post('project/addUsers', [SingleProjectController::class, 'addUsers'])
+    ->middleware('auth')
+    ->name('project.addusers');
 
 Route::get('project/{id}/add-file', function () {
     return Inertia::render('SingleProject/AddFile');

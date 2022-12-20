@@ -4,12 +4,11 @@
         <Head :title="project.name" />
 
         <AuthenticatedLayout>
-            <ProjectInformationCard :project="project" :user="leader" />
-            <div v-if="!isAdding()">
-                <div v-if="($page.props.auth.user.type_id !== 3)"
-                    class="grid grid-cols-4 text-center rounded">
+            <ProjectInformationCard :project="project"/>
+            <div v-if="!isEditing()">
+                <div v-if="($page.props.auth.user.type_id !== 3)" class="grid grid-cols-4 text-center rounded">
                     <div>
-                        <button
+                        <button @click="toggleEditing('project')"
                             class="bg-slate-200 hover:bg-blue-500 text-blue-700 font-semibold hover:text-white px-5 py-1.5 border border-blue-500 hover:border-transparent rounded">
                             Edit Project
                         </button>
@@ -18,25 +17,24 @@
                         <!-- ~ spacing ~ -->
                     </div>
                     <div>
-                        <button
-                        @click="toggleAdding('folder')"
-                        class="bg-slate-200 hover:bg-blue-500 text-blue-700 font-semibold hover:text-white px-5 py-1.5 border border-blue-500 hover:border-transparent rounded">
-                        Add folder
-                    </button>
-                </div>
-                <div>
-                    <button
-                    @click="toggleAdding('users')"
+                        <button @click="toggleEditing('folder')"
+                            class="bg-slate-200 hover:bg-blue-500 text-blue-700 font-semibold hover:text-white px-5 py-1.5 border border-blue-500 hover:border-transparent rounded">
+                            Add folder
+                        </button>
+                    </div>
+                    <div>
+                        <button @click="toggleEditing('users')"
                             class="bg-slate-200 hover:bg-blue-500 text-blue-700 font-semibold hover:text-white px-5 py-1.5 border border-blue-500 hover:border-transparent rounded">
                             Add users
                         </button>
                     </div>
                 </div>
-                <ProjectFoldersCard :folders="folders" />
+                <ProjectFoldersCard :folders="folders" @enter="(id) => setParent(id)" class="py-5" />
             </div>
 
-            <ProjectAddFolder v-if="addingFolder" @cancel="back" :project="project"/>
-            <ProjectAddUsers v-if="addingUsers" @cancel="back" :users="users" :project="project" />
+            <ProjectEdit v-if="editingProject" @cancel="back" :project="project" :leaders="props.allLeaders" :allStatus="props.allStatus"/>
+            <ProjectAddFolder v-if="addingFolder" @cancel="back" :project="project" :parentId="parent" />
+            <ProjectAddUsers v-if="addingUsers" @cancel="back" :users="users" :project="project" :currentUsers="props.currentUsers"/>
 
         </AuthenticatedLayout>
     </div>
@@ -50,33 +48,40 @@ import ProjectAddFolder from '@/Components/SingleProject/ProjectAddFolder.vue'
 import ProjectAddUsers from '@/Components/SingleProject/ProjectAddUsers.vue';
 import ProjectInformationCard from '@/Components/SingleProject/ProjectInformationCard.vue';
 import ProjectFoldersCard from '@/Components/SingleProject/ProjectFoldersCard.vue';
+import ProjectEdit from '@/Components/SingleProject/ProjectEdit.vue';
 import { Inertia } from '@inertiajs/inertia';
 
-Inertia.reload({ only: ['users', 'folders']});
-const props = defineProps(['leader', 'project', 'folders', 'users']);
+const props = defineProps(['project', 'folders', 'users','currentUsers', 'allLeaders', 'allStatus']);
 
 const addingFolder = ref(false);
 const addingUsers = ref(false);
+const editingProject = ref(false);
+
 const project = props.project;
-const leader = props.leader;
 const folders = props.folders;
 const users = props.users;
+const parent = ref(null);
 
-console.log(isAdding());
-
-function toggleAdding(type) {
-    if(type == 'folder') addingFolder.value = !addingFolder.value;
-    if(type == 'users') addingUsers.value = !addingUsers.value;
+function toggleEditing(type) {
+    if (type == 'folder') addingFolder.value = !addingFolder.value;
+    if (type == 'users') addingUsers.value = !addingUsers.value;
+    if (type == 'project') editingProject.value = !editingProject.value;
 }
 
-function isAdding() {
-    return (addingFolder.value || addingUsers.value);
+function isEditing() {
+    return (addingFolder.value || addingUsers.value || editingProject.value);
 }
 
 function back() {
     addingFolder.value = false;
     addingUsers.value = false;
+    editingProject.value = false;
 }
+
+function setParent(folder_id) {
+    parent.value = folder_id;
+}
+
 </script>
 
 

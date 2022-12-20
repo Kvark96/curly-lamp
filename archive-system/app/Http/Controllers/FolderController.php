@@ -20,6 +20,6 @@ class FolderController extends Controller
         $project->folders()->create($validated);
 
         return redirect('/project/' . $project->id)
-            ->with('success','The CPE was created succesfully!');
+            ->with('success','The folder was created succesfully!');
     }
 }

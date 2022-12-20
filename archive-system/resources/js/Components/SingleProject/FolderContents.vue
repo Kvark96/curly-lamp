@@ -6,7 +6,7 @@
             </div>
             <div class="">
                 <!-- Files -->
-                <FolderContentList class="px-5" type="file" :list="files" />
+                <FolderContentList v-if="!isAddingFile" class="px-5" type="file" :list="files" />
 
                 <div v-if="isAddingFile" class="flex justify-center">
                     <FolderAddFile class="w-96" @cancel="toggleForms('file')" :folder="folder"/>
@@ -17,7 +17,7 @@
                 </div>
 
                 <!-- Links -->
-                <FolderContentList class="px-5" type="link" :list="links" />
+                <FolderContentList v-if="!isAddingLink" class="px-5" type="link" :list="links" />
                 <div v-if="isAddingLink" class="flex justify-center">
                     <FolderAddLink class="w-96" @cancel="toggleForms('link')" :folder="folder"/>
                 </div>

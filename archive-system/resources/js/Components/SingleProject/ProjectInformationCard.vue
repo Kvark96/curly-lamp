@@ -7,10 +7,10 @@
             <div class=" border-black">
 
             </div>
-            <div class=" text-sm border-black text-gray-700"> {{ readableCreationDate }} </div>
+            <div class="text-sm border-black text-gray-700"> {{ readableCreationDate }} </div>
             <div class="text-left border-black text-gray-700"> Status: {{ project.status.name }}</div>
             <div class=" border-black"></div>
-            <div class=" border-black text-gray-700">Contact: {{ project.leader.name }}</div>
+            <div class=" border-black text-gray-700">Leader: {{ project.leader.name }}</div>
             <div class="col-span-3 text-left bg-slate-300 rounded px-2 py-2">
                 <!-- <p class="block uppercase tracking-wide text-gray-700 text-xs px-2 font-bold mb-2">Description</p> -->
                 <p class="px-2">
@@ -22,12 +22,9 @@
 </template>
 
 <script setup>
-import { Link } from '@inertiajs/inertia';
-
-const props = defineProps(['project', 'user']);
+const props = defineProps(['project']);
 
 let project = props.project;
-let user = props.user;
 
 let readableCreationDate = new Date(project.created_at).toLocaleDateString();
 

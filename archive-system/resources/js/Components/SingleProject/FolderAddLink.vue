@@ -1,7 +1,8 @@
 <template>
-    <form @submit.prevent="form.post(route('links.store'))">
+    <form @submit.prevent="form.post(route('links.store'), { preserveScroll: true })">
         <div class="grid grid-cols-3 grid-rows-3 w-full px-5 border border-slate-400 rounded bg-slate-300">
             <div class="py-4">
+                <div v-if="form.wasSuccessful">Link was uploaded!</div>
                 <input type="text"
                     class="form-control relative flex-auto min-w-0 block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                     placeholder="URL" v-model="form.url" />
@@ -18,10 +19,10 @@
                     type="submit" id="submit">
                     Save
                 </button>
-                <button @click="$emit('cancel')"
+                <Link as="button"
                     class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
-                    Cancel
-                </button>
+                Back
+                </Link>
             </div>
             <div class="col-span-3 py-1.5 row-span-2">
                 <textarea id="description" v-model="form.description" class="w-full h-full resize-none" type="text"
@@ -35,7 +36,7 @@
 </template>
 
 <script setup>
-import { useForm } from '@inertiajs/inertia-vue3';
+import { useForm, Link } from '@inertiajs/inertia-vue3';
 
 const props = defineProps(['folder', 'errors']);
 

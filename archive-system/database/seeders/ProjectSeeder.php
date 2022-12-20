@@ -56,6 +56,12 @@ class ProjectSeeder extends Seeder
             $project = Project::factory()->create();
             DB::table('project_user')->insert(['user_id' => $user->id, 'project_id' => $project->id]);
             for($j = 0; $j < 6; $j++) {
+                $rndUser = User::factory()->create([
+                    'name' => fake()->name(),
+                    'email' => fake()->email(),
+                    'password' => Hash::make('password'),
+                ]);
+                $project->users()->save($rndUser);
                 $folder = Folder::factory()->create(['project_id' => $project]);
 
                 for($k = 0; $k < 6; $k++)
