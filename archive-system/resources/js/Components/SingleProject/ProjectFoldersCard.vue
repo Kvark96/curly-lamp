@@ -3,6 +3,9 @@
         <FolderList v-if="outerVisible" @show="showInner" :folders="folders"/>
         <FolderSubList v-if="innerVisible" @show="showContents" :folders="folders" :parent="currentFolder"/>
         <div class="flex justify-center py-5">
+            <button v-if="outerVisible" class="w-1/6 py-2 bg-blue-500 text-white font-semibold align-middle border border-transparent rounded">
+                <Link href="/projects">Back</Link>
+            </button>
             <button v-if="innerVisible" @click="reset" class="w-1/6 py-2 bg-blue-500 text-white font-semibold align-middle border border-transparent rounded">
                 Back
             </button>
@@ -25,6 +28,7 @@ import FolderContents from './FolderContents.vue';
 import FolderSubList from './FolderSubList.vue';
 import FolderList from './FolderList.vue';
 import { ref } from 'vue';
+import { Link } from '@inertiajs/inertia-vue3';
 
 const props = defineProps(['folders']);
 const emit = defineEmits(['enter']);

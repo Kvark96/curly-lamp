@@ -3,6 +3,7 @@
         <form @submit.prevent="form.put(route('project.update', props.project.id))">
             <div class="rounded bg-slate-200 grid grid-cols-3 gap-4 text-center py-5 px-5">
                 <div class="col-span-2 text-left tracking-wide text-xl font-bold w-full">
+                    <div v-if="form.wasSuccessful"> Project was updated! </div>
                     <div class="text-gray-700 rounded border border-">
                         <input class="w-full" type="text" v-model="form.name" />
                     </div>

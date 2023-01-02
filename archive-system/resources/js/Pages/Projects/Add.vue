@@ -28,3 +28,4 @@ defineProps(['leaders', 'statuses']);
 <style lang="scss" scoped>
 
 </style>
+

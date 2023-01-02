@@ -9,6 +9,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class ProjectController extends Controller
 {
@@ -31,7 +32,7 @@ class ProjectController extends Controller
             $project = Project::updateOrCreate($validated);
             $project->users()->attach($validated['leader_id']);
         } catch (Exception $e) {
-            // dd($e);
+            throw new HttpException('Failed to create a new project: ' . $e->getMessage(), code: 500);
         }
         return $this->index();
     }
