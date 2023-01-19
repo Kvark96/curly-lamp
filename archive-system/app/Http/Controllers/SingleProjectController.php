@@ -34,7 +34,8 @@ class SingleProjectController extends Controller
             return $searchForProject;
         });
 
-        $onProject = $currentUsers[1]->chunk(10);
+
+        $onProject = $currentUsers->count() == 1 ? collect() : $currentUsers[1]->chunk(10);
         $notOnProject = $currentUsers[0]->chunk(10);
 
         return Inertia::render('SingleProject/Project', [

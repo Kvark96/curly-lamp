@@ -31,12 +31,12 @@ import { ref } from 'vue';
 import { Link } from '@inertiajs/inertia-vue3';
 
 const props = defineProps(['folders']);
-const emit = defineEmits(['enter']);
 const folders = props.folders;
 
 const outerVisible = ref(true);
 const innerVisible = ref(false);
 const currentFolder = ref(null);
+const emit = defineEmits(['enter']);
 
 function showInner(folder)
 {
